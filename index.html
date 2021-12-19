@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator</title>
+    <title>Quiz Time!!</title>
     <link rel="stylesheet" type="text/css" href="./assets/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css"/>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
 </head>
-<body>
+<body onload="countdown()">
     <h1>Quiz time</h1>
+    <h2 id="countdown"></h2>
+    <h2 id="theQuestion"></h2>
     <ul id="quizUL">
-
+        <li class="selection"><a onclick="add10()" href="#"><span id="button1">Answer 1</span></a></li>
+        <li class="selection"><a onclick="sub10()" href="#"><span id="button2">Answer 2</span></a></li>
+        <li class="selection"><a onclick="sub10()" href="#"><span id="button3">Answer 3</span></a></li>
+        <li class="selection"><a onclick="sub10()" href="#"><span id="button4">Answer 4</span></a></li>
     </ul>
 
+    <h3 id="over"></h3>
+    <br>
+    <h4>Score: <span id="score">0</span></h4>
+    <h4>Record: <span id="record"></span></h4>
 
     <script src="./assets/js/quiz.js"></script>
 </body>

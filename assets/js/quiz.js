@@ -17,7 +17,8 @@ if(!highScore){
 document.getElementById("record").innerHTML= highScore;
 
 function qSet(){
-        var turn = correct + wrong;
+    /* function to set the questions*/
+    var turn = correct + wrong;
 
     question = [
         "What is the famous quote?",
@@ -101,6 +102,14 @@ function qSet(){
     document.getElementById("theQuestion").innerHTML=qAndA.q;
 }
 
+function start(){
+    document.getElementById("mainQuiz").style.display = "contents";
+    document.getElementById("btn_start").style.display = "none";
+    document.getElementById("btn_again").style.display = "none";
+    timeLeft = 30;
+    countdown();
+}
+
 
 function countdown() {
 /* main parts of countdown code taken from student example '04-WEB-APIS - 01-Monday - 10-Stu-Timers-Intervals', amended code in if statement*/
@@ -122,8 +131,9 @@ function countdown() {
         timerEl.textContent = '';
         document.getElementById("over").innerHTML="Game Over<br/><br/>You scored: "+correct;
         document.getElementById("score").innerHTML="0";
-        document.getElementById("quizUL").style.visibility = "hidden";
-        document.getElementById("theQuestion").style.visibility = "hidden";
+        document.getElementById("btn_again").style.display = "contents";
+        
+        document.getElementById("mainQuiz").style.display = "none";
         
         
         if(correct > highScore || highScore == null){

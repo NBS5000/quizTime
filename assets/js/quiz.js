@@ -25,36 +25,66 @@ function qSet(){
         "What is Emperor Palpatine's first name?",
         "Which two characters are the only ones to appear in every Episode movie?",
         "How does Luke destroy the Imperial walker (AT-AT)?",
-        "What was unique about Darth Maul's lightsaber?"
+        "What was unique about Darth Maul's lightsaber?",
+        "Which year was Star Wars first released?",
+        "Which starfighter does Luke Skywalker fly?",
+        "Who created Star Wars?",
+        "What powers a lightsaber?",
+        "Which bounty hunter catches Han Solo?",
+        "What is the name of The Child in the Mandalorian?"
     ]
 
     answer = [
-        "No, I am your father",
+        "'No, I am your father'",
         "Sheev",
         "R2-D2 & C3PO",
         "Tripping it up",
-        "It was double ended"
+        "It was double ended",
+        "1977",
+        "X-Wing",
+        "George Lucas",
+        "Kyber crystal",
+        "Boba Fett",
+        "Grogu"
     ]
     false1 = [
-        "Luke, I am your father",
+        "'Luke, I am your father'",
         "Steve",
         "Luke & Leia",
         "Lasers",
-        "It was purple"
+        "It was purple",
+        "1983",
+        "Y-Wing",
+        "Steven Spielberg",
+        "The force",
+        "Dengar",
+        "Baby Yoda"
     ]
     false2 = [
-        "Luke, who's your daddy",
+        "'Luke, who's your daddy'",
         "Darth",
         "Han Solo & Chewbacca",
         "Missiles",
-        "It was curved"
+        "It was curved",
+        "1980",
+        "The Millenium Falcon",
+        "JJ Abrams",
+        "The Jedi's mind",
+        "Bossk",
+        "Little One"
     ]
     false3 = [
-        "Yo, I'm yo pappy",
+        "'Hey, I'm yo pappy'",
         "Garth",
         "Rey & Finn",
         "Asking nicely",
-        "It squeaked"
+        "It squeaked",
+        "1994",
+        "TIE Fighter",
+        "JRR Tolkein",
+        "Batteries",
+        "IG-88",
+        "He has no name"
     ]
 
     qAndA = {
@@ -75,13 +105,13 @@ function qSet(){
         var char = nums.charAt(r);
         var btn = "button"+(char);
         if(_loop == 0){
-            document.getElementById(btn).innerHTML= "<a onclick='add10()' href='#'>" + qAndA.a + "</a>";
+            document.getElementById(btn).innerHTML= "<a class='select' onclick='add5()' href='#'>" + qAndA.a + "</a>";
         }else if(_loop == 1){
-            document.getElementById(btn).innerHTML="<a onclick='sub10()' href='#'>" + qAndA.f1 + "</a>";
+            document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f1 + "</a>";
         }else if(_loop == 2){
-            document.getElementById(btn).innerHTML="<a onclick='sub10()' href='#'>" + qAndA.f2 + "</a>";
+            document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f2 + "</a>";
         }else if(_loop == 3){
-            document.getElementById(btn).innerHTML="<a onclick='sub10()' href='#'>" + qAndA.f3 + "</a>";
+            document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f3 + "</a>";
         }
 
         nums = nums.replace(char,"");
@@ -104,9 +134,13 @@ function qSet(){
 
 function start(){
     document.getElementById("mainQuiz").style.display = "contents";
+    document.getElementById("quizUL").style.display = "flex";
     document.getElementById("btn_start").style.display = "none";
     document.getElementById("btn_again").style.display = "none";
+    document.getElementById("over").style.display = "none";
     timeLeft = 30;
+    correct = 0;
+    wrong = 0;
     countdown();
 }
 
@@ -125,13 +159,14 @@ function countdown() {
         } else if (timeLeft === 1) {
         // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
         timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
+        // timeLeft--;
         } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         timerEl.textContent = '';
         document.getElementById("over").innerHTML="Game Over<br/><br/>You scored: "+correct;
         document.getElementById("score").innerHTML="0";
-        document.getElementById("btn_again").style.display = "contents";
+        document.getElementById("btn_again").style.display = "inline-block";
+        document.getElementById("over").style.display = "inline-block";
         
         document.getElementById("mainQuiz").style.display = "none";
         
@@ -147,9 +182,9 @@ function countdown() {
     qSet();
 }
 
-function add10(){
+function add5(){
     correct +=1;
-    timeLeft+=10;
+    timeLeft+=6;
     qSet();
     document.getElementById("score").innerHTML=correct;
 }
@@ -161,6 +196,10 @@ function sub10(){
     wrong +=1;
     qSet();
     }
+}
+
+function clearScore(){
+    localStorage.setItem("highScore","0");
 }
 
 

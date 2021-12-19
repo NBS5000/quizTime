@@ -1,0 +1,18 @@
+/*
+Homework wk2
+Portfolio Start
+-Steve Barry-
+media css file
+*/
+
+
+@media screen and (max-width:1060px) and (min-width:650px) {
+    .selection{
+        width: 48%;
+    }
+}
+@media screen and (max-width:650px) {
+    .selection{
+        width: 98%;
+    }
+}

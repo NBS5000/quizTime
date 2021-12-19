@@ -210,6 +210,16 @@ function clearScore(){
 
 function hallOfFame(score){
 
+    function rank(a,b){
+        if(parseInt(a.score) < parseInt(b.score)){
+            return -1;
+        }else if(parseInt(a.score) < parseInt(b.score)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     if(score == 101){
         var dummy1={
             uname:"test",
@@ -221,15 +231,17 @@ function hallOfFame(score){
         }
         var dummy3={
             uname:"test3",
-            score:2
+            score:"1"
         }
         
         hof.push(dummy1,dummy2,dummy3)
 
-        localStorage("hallOfFame", hof)
-
-        
-
+        localStorage.setItem("hallOfFame", JSON.stringify(hof))
+        var list = localStorage.getItem("hallOfFame");
+        console.log(list);
+        // var newlist = list.sort(rank);
+        // console.log(newlist);
+        console.log(list.length);
     }
 }
 

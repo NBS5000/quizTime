@@ -3,3 +3,16 @@
 main css file
 */
 
+body{
+    text-align: center;
+}
+
+#quizUL{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selection{
+    margin: 0 auto;
+    width: 20%;
+}

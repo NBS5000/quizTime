@@ -3,6 +3,7 @@ var timeLeft = 30;
 var timerEl = document.getElementById('countdown');
 var loop = 0;
 var correct = 0;
+var wrong = 0;
 var question = [];
 var answer = [];
 var false1 = [];
@@ -16,7 +17,7 @@ if(!highScore){
 document.getElementById("record").innerHTML= highScore;
 
 function qSet(){
-        
+        var turn = correct + wrong;
 
     question = [
         "What is the famous quote?",
@@ -56,11 +57,11 @@ function qSet(){
     ]
 
     qAndA = {
-        q: question[correct],
-        a: answer[correct],
-        f1: false1[correct],
-        f2: false2[correct],
-        f3: false3[correct]
+        q: question[turn],
+        a: answer[turn],
+        f1: false1[turn],
+        f2: false2[turn],
+        f3: false3[turn]
     }
     var nums = "1234";
     var len = nums.length;
@@ -73,13 +74,13 @@ function qSet(){
         var char = nums.charAt(r);
         var btn = "button"+(char);
         if(_loop == 0){
-            document.getElementById(btn).innerHTML=qAndA.a;
+            document.getElementById(btn).innerHTML= "<a onclick='add10()' href='#'>" + qAndA.a + "</a>";
         }else if(_loop == 1){
-            document.getElementById(btn).innerHTML=qAndA.f1;
+            document.getElementById(btn).innerHTML="<a onclick='sub10()' href='#'>" + qAndA.f1 + "</a>";
         }else if(_loop == 2){
-            document.getElementById(btn).innerHTML=qAndA.f2;
+            document.getElementById(btn).innerHTML="<a onclick='sub10()' href='#'>" + qAndA.f2 + "</a>";
         }else if(_loop == 3){
-            document.getElementById(btn).innerHTML=qAndA.f3;
+            document.getElementById(btn).innerHTML="<a onclick='sub10()' href='#'>" + qAndA.f3 + "</a>";
         }
 
         nums = nums.replace(char,"");
@@ -121,6 +122,9 @@ function countdown() {
         timerEl.textContent = '';
         document.getElementById("over").innerHTML="Game Over<br/><br/>You scored: "+correct;
         document.getElementById("score").innerHTML="0";
+        document.getElementById("quizUL").style.visibility = "hidden";
+        document.getElementById("theQuestion").style.visibility = "hidden";
+        
         
         if(correct > highScore || highScore == null){
             localStorage.setItem("highScore",correct);
@@ -141,9 +145,11 @@ function add10(){
 }
 function sub10(){
     if(timeLeft <10){
-        timeLeft = 1;
+        timeLeft = 0;
     }else{
     timeLeft-=10;
+    wrong +=1;
+    qSet();
     }
 }
 

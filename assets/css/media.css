@@ -10,9 +10,15 @@ media css file
     .selection{
         width: 48%;
     }
+    #swQuiz{
+        width: 400px;
+    }
 }
 @media screen and (max-width:650px) {
     .selection{
         width: 98%;
+    }
+    #swQuiz{
+        width: 300px;
     }
 }

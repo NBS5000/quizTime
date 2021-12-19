@@ -12,26 +12,29 @@
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
 </head>
 <body >
-    <h1>Quiz time</h1>
-    <div id="mainQuiz">
-        <h2 id="countdown"></h2>
-        <h2 id="theQuestion"></h2>
-        <ul id="quizUL">
-            <li class="selection" id="button1"></li>
-            <li class="selection" id="button2"></li>
-            <li class="selection" id="button3"></li>
-            <li class="selection" id="button4"></li>
-        </ul>
+    <h1><img id="swQuiz" src="./assets/images/qt.png" alt="Quiz time written in Star Wars font"></h1>
+    <div id="mainContent"> 
+        <div id="mainQuiz">
+            <h2 id="countdown"></h2>
+            <h2 id="theQuestion"></h2>
+            <ul id="quizUL">
+                <li class="selection" id="button1"></li>
+                <li class="selection" id="button2"></li>
+                <li class="selection" id="button3"></li>
+                <li class="selection" id="button4"></li>
+            </ul>
+        </div>
+        <button id="btn_start" onclick="start()">Start</button>
+
+        <h3 id="over"></h3>
+        <br>
+        <h4>Score: <span id="score">0</span></h4>
+        <h4>Record: <span id="record"></span></h4>
+
+        <button id="btn_again" onclick="start()">Play Again</button>
+        <br/><br/>
+        <button onclick="clearScore()">Clear Top Score</button>
     </div>
-    <button id="btn_start" onclick="start()">Start</button>
-
-    <h3 id="over"></h3>
-    <br>
-    <h4>Score: <span id="score">0</span></h4>
-    <h4>Record: <span id="record"></span></h4>
-
-    <button id="btn_again" onclick="start()">Play Again</button>
-
     <script src="./assets/js/quiz.js"></script>
 </body>
 </html>

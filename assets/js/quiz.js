@@ -10,6 +10,7 @@ var false1 = [];
 var false2 = [];
 var false3 = [];
 var qAndA = "";
+var hof = [];
 var highScore = localStorage.getItem("highScore");
 if(!highScore){
     localStorage.setItem("highScore","0");
@@ -175,6 +176,7 @@ function countdown() {
             localStorage.setItem("highScore",correct);
             document.getElementById("record").innerHTML=correct;
         }
+        hallOfFame(correct);
         // Use `clearInterval()` to stop the timer
         clearInterval(timeInterval);
         }
@@ -184,7 +186,7 @@ function countdown() {
 
 function add5(){
     correct +=1;
-    timeLeft+=6;
+    timeLeft+=5;
     qSet();
     document.getElementById("score").innerHTML=correct;
 }
@@ -199,8 +201,36 @@ function sub10(){
 }
 
 function clearScore(){
-    localStorage.setItem("highScore","0");
+    var $confirm = confirm("Are you sure you want to clear the top score?")
+    if($confirm){
+        localStorage.setItem("highScore","0");
+        document.getElementById("record").innerHTML="0";
+    }
 }
 
+function hallOfFame(score){
+
+    if(score == 101){
+        var dummy1={
+            uname:"test",
+            score:"1"
+        }
+        var dummy2={
+            uname:"test2",
+            score:"1"
+        }
+        var dummy3={
+            uname:"test3",
+            score:2
+        }
+        
+        hof.push(dummy1,dummy2,dummy3)
+
+        localStorage("hallOfFame", hof)
+
+        
+
+    }
+}
 
 

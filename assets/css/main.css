@@ -7,17 +7,30 @@ main css file
 
 
 body{
+width: 100%;
+position: relative;
+background-image: url("../images/bg.png");
+background-repeat: repeat;
+}
+#mainContent{
     text-align: center;
     width: 80%;
     margin: 0 auto;
 }
 
 h1{
-    margin-top: 10%;
+    background-repeat: no-repeat;
+    width: 100%;
     margin-bottom: 5%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 500%;
-    background-image: url("./assets/images/qt.png");
+    position: relative;
+    display: block;
+    text-align: center;
+
+}
+#swQuiz{
+    margin-top: 10%;
 }
 
 #mainQuiz, #btn_again{
@@ -28,6 +41,7 @@ h1{
     padding: 5%;
     border: 2px solid black;
     border-radius: 20px;
+    background-color: white
 }
 
 #quizUL{
@@ -47,7 +61,7 @@ h1{
 }
 .select{
     display: inline-block;
-    border: 1px solid green;
+    border: 1px solid lightcyan;
     border-radius: 15px;
     height: 100%;
     width: 90%;
@@ -55,10 +69,30 @@ h1{
     line-height: 120%;
     color: black;
     transition: 0.5s;
+    background-color: rgb(220, 220, 220);
 }
 
 .select:hover{
     background-color: rgb(50, 115, 50);
     color: white;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#btn_again{
+    margin-top: 5%;
+}
+
+button{
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: none;
+    border: 1px solid lightcyan;
+    transition: 0.5s;
+    width: 35%;
+    min-width: 160px;
+}
+
+button:hover{
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }

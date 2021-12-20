@@ -31,7 +31,16 @@ function qSet(){
         "Who created Star Wars?",
         "What powers a lightsaber?",
         "Which bounty hunter catches Han Solo?",
-        "What is the name of The Child in the Mandalorian?"
+        "What is the name of The Child in the Mandalorian?",
+        "Which planet was Padmé Amidala Queen of?",
+        "What is Han Solo's response when Leia says 'I love you'?",
+        "What language are the words written on Darth Vader's chest piece in?",
+        "Who is the only rebel starfighter pilot to survive all three movies in the original trilogy?",
+        "When Luke asked what was in the cave on Dagobah, what was Yoda's response?",
+        "What does TIE in TIE Fighter stand for?",
+        "What was Grand Admiral Thrawn's project, which lost out to the Death Star for the Emperors approval?",
+        "What was the name of the command given to Clone Troopers to execute the Jedi?",
+        "What is the last name of the character my daughter is named after?"
     ]
 
     answer = [
@@ -45,7 +54,16 @@ function qSet(){
         "George Lucas",
         "Kyber crystal",
         "Boba Fett",
-        "Grogu"
+        "Grogu",
+        "Naboo",
+        "'I know'",
+        "Ancient Hebrew",
+        "Wedge Antilles",
+        "'Only what you take with you'",
+        "Twin Ion Engine",
+        "The TIE Defender",
+        "Order 66",
+        "Jade"
     ]
     false1 = [
         "'Luke, I am your father'",
@@ -58,7 +76,16 @@ function qSet(){
         "Steven Spielberg",
         "The force",
         "Dengar",
-        "Baby Yoda"
+        "Baby Yoda",
+        "Tatooine",
+        "'I love you too'",
+        "Basic",
+        "Luke Skywalker",
+        "'Your fear'",
+        "This Is Evil",
+        "World Devastator",
+        "Command 66",
+        "Skywalker"
     ]
     false2 = [
         "'Luke, who's your daddy'",
@@ -71,7 +98,16 @@ function qSet(){
         "JJ Abrams",
         "The Jedi's mind",
         "Bossk",
-        "Little One"
+        "Little One",
+        "Coruscant",
+        "'No you don't'",
+        "Huttese",
+        "General Hux",
+        "'Me'",
+        "Turbo Intergalactic Engine",
+        "Death Troopers",
+        "Execute Jedi Order",
+        "Amidala"
     ]
     false3 = [
         "'Hey, I'm yo pappy'",
@@ -84,7 +120,16 @@ function qSet(){
         "JRR Tolkein",
         "Batteries",
         "IG-88",
-        "He has no name"
+        "He has no name",
+        "Hoth",
+        "Silence",
+        "Ancient Egyptian",
+        "Admiral Ackbar",
+        "No response, just a smile",
+        "The Imperial Empire",
+        "The Clone Army",
+        "Kill Team Go",
+        "Organa"
     ]
 
     qAndA = {
@@ -209,7 +254,7 @@ function clearScore(){
 }
 
 function showHof(){
-    // debugger;
+
     var showList = JSON.parse(localStorage.getItem("hallOfFame"));
     var $loop = 0;
     var display;
@@ -223,7 +268,7 @@ function showHof(){
 }
 
 function hallOfFame(num){
-debugger;
+
     var list = JSON.parse(localStorage.getItem("hallOfFame")); 
     if(num == 101){
         if(!list){
@@ -255,8 +300,7 @@ debugger;
 
         showHof();
     } else
-        // debugger;
-        // var list = JSON.parse(localStorage.getItem("hallOfFame"));
+
         var last = list[list.length - 1];
         var listSort = list.sort(function(a,b){
             return b.score - a.score;

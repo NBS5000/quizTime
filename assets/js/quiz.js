@@ -163,17 +163,7 @@ function qSet(){
         nums = nums.replace(char,"");
         _loop = _loop+1;
 
-
-
-        /* testing */
-        // console.log(l);
-        // console.log(btn);
-        // console.log(char);
-        // console.log(nums);
     }
-    // /* testing */
-    // var test = qAndA.q;
-    // console.log(test);
 
     document.getElementById("theQuestion").innerHTML=qAndA.q;
 }
@@ -262,9 +252,11 @@ function showHof(){
     var display = "";
     console.log(showList.length);
     while($loop < showList.length){
-
-        display += "<br/><h3 id='topScore' class='scoreboard'>"+showList[$loop].uname+" - "+showList[$loop].score+"</h3>";
-        console.log(showList[$loop].uname);
+        if($loop == 0){
+            display += "<br/><h4 id='topScore' class='scoreboard'><img class='firstPlaceBoba' src='./assets/images/fett.png' alt='Boba Fett helmet'/>"+showList[$loop].uname+" - "+showList[$loop].score+"<img class='firstPlaceBoba' src='./assets/images/fett.png' alt='Boba Fett helmet'/></h4>";
+        }else{
+            display += "<br/><h4 id='topScore' class='scoreboard'>"+showList[$loop].uname+" - "+showList[$loop].score+"</h4>";
+        }
         $loop++;
     }
 

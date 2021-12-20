@@ -96,7 +96,15 @@ button{
 button:hover{
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
-
+.firstPlaceBoba{
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+    vertical-align: middle;
+}
+#topScore {
+    vertical-align: middle;
+}
 #hallOfFame{
 
 

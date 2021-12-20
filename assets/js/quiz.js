@@ -160,7 +160,7 @@ function countdown() {
         } else if (timeLeft === 1) {
         // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
         timerEl.textContent = timeLeft + ' second remaining';
-        // timeLeft--;
+        timeLeft--;
         } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         timerEl.textContent = '';
@@ -231,16 +231,45 @@ function hallOfFame(score){
         }
         var dummy3={
             uname:"test3",
-            score:"1"
+            score:"2"
         }
         
-        hof.push(dummy1,dummy2,dummy3)
+        hof.push(dummy1,dummy2,dummy3);
 
-        localStorage.setItem("hallOfFame", JSON.stringify(hof))
-        var list = localStorage.getItem("hallOfFame");
-        console.log(list);
-        // var newlist = list.sort(rank);
-        // console.log(newlist);
+        localStorage.setItem("hallOfFame", JSON.stringify(hof));
+        var list = JSON.parse(localStorage.getItem("hallOfFame"));
+
+        var listLen = list.length;
+
+        var _loop = 0;
+        var _1,_2,_3,_4,_5;
+        while(_loop < listLen){
+            var show = list[_loop];
+            console.log(show);
+            if(_loop == 0){
+                _1 = show;
+            }else if(_loop == 1){
+                _2 = show;
+            }else if(_loop == 2){
+                _3 = show;
+            }else if(_loop == 3){
+                _4 = show;
+            }else if(_loop == 4){
+                _5 = show;
+            }  
+
+
+            _loop+=1;
+        }
+
+        console.log(_1,"\n",_2,"\n",_3,"\n",_4,"\n",_5)
+
+        console.log(list.sort(function(a,b){
+            return b.score - a.score;
+        }));
+        // console.log(list);
+
+
         console.log(list.length);
     }
 }

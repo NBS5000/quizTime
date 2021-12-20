@@ -10,7 +10,6 @@ var false1 = [];
 var false2 = [];
 var false3 = [];
 var qAndA = "";
-var hof = [];
 var highScore = localStorage.getItem("highScore");
 if(!highScore){
     localStorage.setItem("highScore","0");
@@ -196,7 +195,7 @@ function sub10(){
     }else{
     timeLeft-=10;
     wrong +=1;
-    qSet();
+    qSet(); 
     }
 }
 
@@ -208,70 +207,64 @@ function clearScore(){
     }
 }
 
-function hallOfFame(score){
+function hallOfFame(num){
+// debugger;
 
-    function rank(a,b){
-        if(parseInt(a.score) < parseInt(b.score)){
-            return -1;
-        }else if(parseInt(a.score) < parseInt(b.score)){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
 
-    if(score == 101){
+    if(num == 101){
         var dummy1={
-            uname:"test",
-            score:"1"
+            uname:"Mr High Ground",
+            score:"2"
         }
         var dummy2={
-            uname:"test2",
+            uname:"Beat this!",
             score:"1"
         }
         var dummy3={
-            uname:"test3",
-            score:"2"
+            uname:"Yoda",
+            score:"1"
         }
         
+        var hof = [];
         hof.push(dummy1,dummy2,dummy3);
 
         localStorage.setItem("hallOfFame", JSON.stringify(hof));
+    } else
+        // debugger;
         var list = JSON.parse(localStorage.getItem("hallOfFame"));
+        var last = list[list.length - 1];
+        var listSort = list.sort(function(a,b){
+            return b.score - a.score;
+        });
+        var lastSort = listSort[listSort.length - 1];
+        console.log(last);
+        console.log(lastSort);
 
-        var listLen = list.length;
-
-        var _loop = 0;
-        var _1,_2,_3,_4,_5;
-        while(_loop < listLen){
-            var show = list[_loop];
-            console.log(show);
-            if(_loop == 0){
-                _1 = show;
-            }else if(_loop == 1){
-                _2 = show;
-            }else if(_loop == 2){
-                _3 = show;
-            }else if(_loop == 3){
-                _4 = show;
-            }else if(_loop == 4){
-                _5 = show;
-            }  
-
-
-            _loop+=1;
+        var lowest = lastSort.score;
+        console.log(lowest);
+        var thisScore = {
+            uname: "",
+            score: num
         }
 
-        console.log(_1,"\n",_2,"\n",_3,"\n",_4,"\n",_5)
-
-        console.log(list.sort(function(a,b){
-            return b.score - a.score;
-        }));
-        // console.log(list);
-
-
-        console.log(list.length);
+        if(thisScore.score > parseInt(lowest)){
+            var user = prompt("The force is strong in this one.\n\nYou've made the leaderboard!\n\nWhat's your name?");
+            var thisScore = {
+                uname: user,
+                score: num
+            }
+            var newList = list.push(thisScore);
+            newList = list.sort(function(a,b){
+                return b.score - a.score;
+            });
+            var $len = newList.length;
+            if($len > 5){
+            newList.pop();
+            }
+            
+        localStorage.setItem("hallOfFame", JSON.stringify(newList));
+        }else{
+            alert("Unlucky, you've not made the leaderboard this time. \n\nTry again, and may the force be with you.");
     }
+
 }
-
-

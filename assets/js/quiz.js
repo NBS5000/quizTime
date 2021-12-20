@@ -246,10 +246,12 @@ function sub10(){
 }
 
 function clearScore(){
-    var $confirm = confirm("Are you sure you want to clear the top score?")
+    var $confirm = confirm("Are you sure you want to clear the top score and Hall of Fame?")
     if($confirm){
         localStorage.setItem("highScore","0");
+        localStorage.removeItem("hallOfFame");
         document.getElementById("record").innerHTML="0";
+        showHof();
     }
 }
 
@@ -257,9 +259,12 @@ function showHof(){
 
     var showList = JSON.parse(localStorage.getItem("hallOfFame"));
     var $loop = 0;
-    var display;
+    var display = "";
+    console.log(showList.length);
     while($loop < showList.length){
-        display += "<h3 id='topScore' class='scoreboard'>"+showList[$loop].uname+" - "+showList[$loop].score+"</h3>";
+
+        display += "<br/><h3 id='topScore' class='scoreboard'>"+showList[$loop].uname+" - "+showList[$loop].score+"</h3>";
+        console.log(showList[$loop].uname);
         $loop++;
     }
 
@@ -306,34 +311,34 @@ function hallOfFame(num){
             return b.score - a.score;
         });
         var lastSort = listSort[listSort.length - 1];
-        console.log(last);
-        console.log(lastSort);
+
 
         var lowest = lastSort.score;
-        console.log(lowest);
+
         var thisScore = {
             uname: "",
             score: num
         }
-
-        if(thisScore.score > parseInt(lowest)){
-            var user = prompt("The force is strong in this one.\n\nYou've made the leaderboard!\n\nWhat's your name?");
-            var thisScore = {
-                uname: user,
-                score: num
+        if(num !== 101){
+            if(thisScore.score > parseInt(lowest)){
+                var user = prompt("The force is strong in this one.\n\nYou've made the leaderboard!\n\nWhat's your name?");
+                var thisScore = {
+                    uname: user,
+                    score: num
+                }
+                var newList = list.push(thisScore);
+                newList = list.sort(function(a,b){
+                    return b.score - a.score;
+                });
+                var $len = newList.length;
+                if($len > 5){
+                newList.pop();
+                }
+                
+            localStorage.setItem("hallOfFame", JSON.stringify(newList));
+            }else{
+                alert("Unlucky, you've not made the leaderboard this time. \n\nTry again, and may the force be with you.");
             }
-            var newList = list.push(thisScore);
-            newList = list.sort(function(a,b){
-                return b.score - a.score;
-            });
-            var $len = newList.length;
-            if($len > 5){
-            newList.pop();
-            }
-            
-        localStorage.setItem("hallOfFame", JSON.stringify(newList));
-        }else{
-            alert("Unlucky, you've not made the leaderboard this time. \n\nTry again, and may the force be with you.");
-    }
+        }
     showHof();
 }

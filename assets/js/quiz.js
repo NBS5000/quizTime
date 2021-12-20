@@ -98,12 +98,13 @@ function qSet(){
     var len = nums.length;
     var _loop = 0;
     while(_loop <= len && _loop < 4){
-        /* get current length of old password (shortened after each loop )*/
+        /* get current length of string (shortened after each loop )*/
         var l = len - _loop;
-        /* pick random char from old pwd*/
+        /* pick random char from string*/
         var r = Math.floor(Math.random() * (l));
         var char = nums.charAt(r);
         var btn = "button"+(char);
+        /* button is selected at random, so answers don't appear in the same location*/
         if(_loop == 0){
             document.getElementById(btn).innerHTML= "<a class='select' onclick='add5()' href='#'>" + qAndA.a + "</a>";
         }else if(_loop == 1){
@@ -207,31 +208,55 @@ function clearScore(){
     }
 }
 
+function showHof(){
+    // debugger;
+    var showList = JSON.parse(localStorage.getItem("hallOfFame"));
+    var $loop = 0;
+    var display;
+    while($loop < showList.length){
+        display += "<h3 id='topScore' class='scoreboard'>"+showList[$loop].uname+" - "+showList[$loop].score+"</h3>";
+        $loop++;
+    }
+
+    document.getElementById("hallOfFame").innerHTML = display;
+
+}
+
 function hallOfFame(num){
-// debugger;
-
-
+debugger;
+    var list = JSON.parse(localStorage.getItem("hallOfFame")); 
     if(num == 101){
-        var dummy1={
-            uname:"Mr High Ground",
-            score:"2"
+        if(!list){
+            var dummy1={
+                uname:"Mr High Ground",
+                score:"3"
+            }
+            var dummy2={
+                uname:"Beat this!",
+                score:"2"
+            }
+            var dummy3={
+                uname:"Yoda",
+                score:"1"
+            }
+            var dummy4={
+                uname:"That's Mr Vader!",
+                score:"1"
+            }
+            var dummy5={
+                uname:"FN-2187",
+                score:"1"
+            }
+            
+            var hof = [];
+            hof.push(dummy1,dummy2,dummy3,dummy4,dummy5);
+            localStorage.setItem("hallOfFame", JSON.stringify(hof));
         }
-        var dummy2={
-            uname:"Beat this!",
-            score:"1"
-        }
-        var dummy3={
-            uname:"Yoda",
-            score:"1"
-        }
-        
-        var hof = [];
-        hof.push(dummy1,dummy2,dummy3);
 
-        localStorage.setItem("hallOfFame", JSON.stringify(hof));
+        showHof();
     } else
         // debugger;
-        var list = JSON.parse(localStorage.getItem("hallOfFame"));
+        // var list = JSON.parse(localStorage.getItem("hallOfFame"));
         var last = list[list.length - 1];
         var listSort = list.sort(function(a,b){
             return b.score - a.score;
@@ -266,5 +291,5 @@ function hallOfFame(num){
         }else{
             alert("Unlucky, you've not made the leaderboard this time. \n\nTry again, and may the force be with you.");
     }
-
+    showHof();
 }

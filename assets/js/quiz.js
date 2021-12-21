@@ -132,7 +132,7 @@ function qSet(){
         "Organa"
     ]
     var qlen = question.length;
-    console.log(qlen);
+    // console.log(qlen);
     if(turn > qlen - 1){
         alert("Well done! You reached the end.");
         timeLeft = 0;
@@ -205,8 +205,8 @@ function countdown() {
         } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         timerEl.textContent = '';
-        console.log(correct+" "+wrong);
-        console.log(question.length);
+        // console.log(correct+" "+wrong);
+        // console.log(question.length);
         if((correct + wrong ) == question.length){
             document.getElementById("over").innerHTML="Well done, you reached the end of the trench run!<br/><br/>You scored: "+correct;
         }else{
@@ -276,11 +276,13 @@ function sub10(){
 }
 
 function clearScore(){
+    // debugger;
     var $confirm = confirm("Are you sure you want to clear the top score and Hall of Fame?")
     if($confirm){
         localStorage.setItem("highScore","0");
         localStorage.removeItem("hallOfFame");
         document.getElementById("record").innerHTML="0";
+        hallOfFame(101);
         showHof();
     }
 }
@@ -306,8 +308,9 @@ function showHof(){
 
 function hallOfFame(num){
 
-    var list = JSON.parse(localStorage.getItem("hallOfFame")); 
+// debugger;
     if(num == 101){
+        var list = JSON.parse(localStorage.getItem("hallOfFame")); 
         if(!list){
             var dummy1={
                 uname:"Mr High Ground",
@@ -336,9 +339,14 @@ function hallOfFame(num){
         }
 
         showHof();
-    } else
+    } else 
+    var list = JSON.parse(localStorage.getItem("hallOfFame")); 
+        if (!list){
+            hallOfFame(101);
+            var list = JSON.parse(localStorage.getItem("hallOfFame")); 
+        }
 
-        var last = list[list.length - 1];
+        // var last = list[list.length - 1];
         var listSort = list.sort(function(a,b){
             return b.score - a.score;
         });

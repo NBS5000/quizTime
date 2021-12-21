@@ -1,3 +1,10 @@
+/*
+Homework wk4
+quiz time
+-Steve Barry-
+javascript file
+*/
+
 /* set all vars needed at this point */
 var timeLeft = 30;
 var timerEl = document.getElementById('countdown');

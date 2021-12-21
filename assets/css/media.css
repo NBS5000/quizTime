@@ -1,11 +1,11 @@
 /*
-Homework wk2
-Portfolio Start
+Homework wk4
+quiz time
 -Steve Barry-
 media css file
 */
-
-
+/* prior to below, answers are 1 row of 4 wide */
+/* when screen at below size, set answers to appear 2 rows of 2 wide*/
 @media screen and (max-width:1060px) and (min-width:650px) {
     .selection{
         width: 48%;
@@ -14,6 +14,7 @@ media css file
         width: 400px;
     }
 }
+/* when screen at below size, set answers to appear 4 rows of 1 wide*/
 @media screen and (max-width:650px) {
     .selection{
         width: 98%;

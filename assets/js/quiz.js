@@ -131,41 +131,47 @@ function qSet(){
         "Kill Team Go",
         "Organa"
     ]
+    var qlen = question.length;
+    console.log(qlen);
+    if(turn > qlen - 1){
+        alert("Well done! You reached the end.");
+        timeLeft = 0;
+    }else{
+        qAndA = {
+            q: question[turn],
+            a: answer[turn],
+            f1: false1[turn],
+            f2: false2[turn],
+            f3: false3[turn]
+        }
+        var nums = "1234";
+        var len = nums.length;
+        var _loop = 0;
+        while(_loop <= len && _loop < 4){
+            /* get current length of string (shortened after each loop )*/
+            var l = len - _loop;
+            /* pick random char from string*/
+            var r = Math.floor(Math.random() * (l));
+            var char = nums.charAt(r);
+            var btn = "button"+(char);
+            /* button is selected at random, so answers don't appear in the same location*/
+            if(_loop == 0){
+                document.getElementById(btn).innerHTML= "<a class='select' onclick='add5()' href='#'>" + qAndA.a + "</a>";
+            }else if(_loop == 1){
+                document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f1 + "</a>";
+            }else if(_loop == 2){
+                document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f2 + "</a>";
+            }else if(_loop == 3){
+                document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f3 + "</a>";
+            }
 
-    qAndA = {
-        q: question[turn],
-        a: answer[turn],
-        f1: false1[turn],
-        f2: false2[turn],
-        f3: false3[turn]
-    }
-    var nums = "1234";
-    var len = nums.length;
-    var _loop = 0;
-    while(_loop <= len && _loop < 4){
-        /* get current length of string (shortened after each loop )*/
-        var l = len - _loop;
-        /* pick random char from string*/
-        var r = Math.floor(Math.random() * (l));
-        var char = nums.charAt(r);
-        var btn = "button"+(char);
-        /* button is selected at random, so answers don't appear in the same location*/
-        if(_loop == 0){
-            document.getElementById(btn).innerHTML= "<a class='select' onclick='add5()' href='#'>" + qAndA.a + "</a>";
-        }else if(_loop == 1){
-            document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f1 + "</a>";
-        }else if(_loop == 2){
-            document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f2 + "</a>";
-        }else if(_loop == 3){
-            document.getElementById(btn).innerHTML="<a class='select' onclick='sub10()' href='#'>" + qAndA.f3 + "</a>";
+            nums = nums.replace(char,"");
+            _loop = _loop+1;
+
         }
 
-        nums = nums.replace(char,"");
-        _loop = _loop+1;
-
+        document.getElementById("theQuestion").innerHTML=qAndA.q;
     }
-
-    document.getElementById("theQuestion").innerHTML=qAndA.q;
 }
 
 function start(){
@@ -199,7 +205,42 @@ function countdown() {
         } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         timerEl.textContent = '';
-        document.getElementById("over").innerHTML="Game Over<br/><br/>You scored: "+correct;
+        console.log(correct+" "+wrong);
+        console.log(question.length);
+        if((correct + wrong ) == question.length){
+            document.getElementById("over").innerHTML="Well done, you reached the end of the trench run!<br/><br/>You scored: "+correct;
+        }else{
+            document.getElementById("over").innerHTML="Game Over<br/><br/>You scored: "+correct;
+        }
+        document.getElementById("score").innerHTML="0";
+        document.getElementById("btn_again").style.display = "inline-block";
+        document.getElementById("over").style.display = "inline-block";
+        
+        document.getElementById("mainQuiz").style.display = "none";
+
+        if(correct > highScore || highScore == null){
+            localStorage.setItem("highScore",correct);
+            document.getElementById("record").innerHTML=correct;
+        }
+        hallOfFame(correct);
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+        }
+    }, 1000);
+
+    if((correct + wrong ) <= question.length){
+        qSet();
+    } else{
+        timerEl.textContent = '';
+        if((correct + wrong ) == question.length){
+            if(correct == question.length){
+                document.getElementById("over").innerHTML="Well done, you reached the end of the trench run and your missile hit!<br/>Bye bye Death Star!<br/><br/>You scored: "+correct;
+            }else{
+                document.getElementById("over").innerHTML="Well done, you reached the end of the trench run but your shot missed! The Rebel Base has been blown up!<br/><br/>You scored: "+correct;
+            }
+        }else{
+            document.getElementById("over").innerHTML="Game Over<br/><br/>You scored: "+correct;
+        }
         document.getElementById("score").innerHTML="0";
         document.getElementById("btn_again").style.display = "inline-block";
         document.getElementById("over").style.display = "inline-block";
@@ -214,9 +255,8 @@ function countdown() {
         hallOfFame(correct);
         // Use `clearInterval()` to stop the timer
         clearInterval(timeInterval);
-        }
-    }, 1000);
-    qSet();
+    }
+
 }
 
 function add5(){
@@ -250,7 +290,7 @@ function showHof(){
     var showList = JSON.parse(localStorage.getItem("hallOfFame"));
     var $loop = 0;
     var display = "";
-    console.log(showList.length);
+
     while($loop < showList.length){
         if($loop == 0){
             display += "<br/><h4 id='topScore' class='scoreboard'><img class='firstPlaceBoba' src='./assets/images/fett.png' alt='Boba Fett helmet'/>"+showList[$loop].uname+" - "+showList[$loop].score+"<img class='firstPlaceBoba' src='./assets/images/fett.png' alt='Boba Fett helmet'/></h4>";

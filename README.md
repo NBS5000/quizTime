@@ -47,17 +47,7 @@ Writing of a solution to resolve the situation, including:
 
 **RESULT**
 
-The end code is stored on Github, and publicly available and viewable. Accessibility functionality has been added, links have been fixed, code has been optimised, and the UI exceeds 90% similarity. This result meets all requirements of the User Story and acceptance criteria:
-
-
-
-
-
-
-
-
-
-
+The end code is stored on Github, and publicly available and viewable. This result meets all requirements of the User Story and acceptance criteria:
 
 * ~~GIVEN I am taking a code quiz~~
 * ~~WHEN I click the start button~~
@@ -75,7 +65,7 @@ The end code is stored on Github, and publicly available and viewable. Accessibi
 
 As the acceptance criteria has been met and exceeded, the task is now complete. 
 
-*As a caveat, the I checked with the teachers to confirm if the topic of questions had to be Javascript related, and they confirmed it did not.*
+*As a caveat, I checked with the teachers to confirm if the topic of questions had to be Javascript related, and they confirmed it did not.*
 > There is a new Google feature named FLoc that is generating the below error. This is not a result of the performance or design of the site.
 > 
 > ![Screenshot of Google FLoC error](./assets/images/floc.PNG "Screenshot of Google FLoC error")

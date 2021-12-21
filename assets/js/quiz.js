@@ -1,4 +1,4 @@
-
+/* set all vars needed at this point */
 var timeLeft = 30;
 var timerEl = document.getElementById('countdown');
 var loop = 0;
@@ -11,14 +11,15 @@ var false2 = [];
 var false3 = [];
 var qAndA = "";
 var highScore = localStorage.getItem("highScore");
+/* if highscore isn't set, set it to 0*/
 if(!highScore){
     localStorage.setItem("highScore","0");
 }
 document.getElementById("record").innerHTML= highScore;
 
 function qSet(){
-    /* function to set the questions*/
-    var turn = correct + wrong;
+    /* function to set the questions and answers*/
+
 
     question = [
         "What is the famous quote?",
@@ -131,12 +132,16 @@ function qSet(){
         "Kill Team Go",
         "Organa"
     ]
+    /*check to see if reached the last question. 
+    this way means that formula doesn't need to be adjusted if more questions asked*/
     var qlen = question.length;
-    // console.log(qlen);
+    var turn = correct + wrong;
+ 
     if(turn > qlen - 1){
         alert("Well done! You reached the end.");
         timeLeft = 0;
     }else{
+        /* set the q&a set for this round */
         qAndA = {
             q: question[turn],
             a: answer[turn],
@@ -144,9 +149,11 @@ function qSet(){
             f2: false2[turn],
             f3: false3[turn]
         }
+        /* randomise which answers are set to which button*/
         var nums = "1234";
         var len = nums.length;
         var _loop = 0;
+        /* loop through and set answers */
         while(_loop <= len && _loop < 4){
             /* get current length of string (shortened after each loop )*/
             var l = len - _loop;
@@ -205,8 +212,7 @@ function countdown() {
         } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         timerEl.textContent = '';
-        // console.log(correct+" "+wrong);
-        // console.log(question.length);
+
         if((correct + wrong ) == question.length){
             document.getElementById("over").innerHTML="Well done, you reached the end of the trench run!<br/><br/>You scored: "+correct;
         }else{
@@ -218,10 +224,12 @@ function countdown() {
         
         document.getElementById("mainQuiz").style.display = "none";
 
+        /* find out if score is new record, and display if it is */
         if(correct > highScore || highScore == null){
             localStorage.setItem("highScore",correct);
             document.getElementById("record").innerHTML=correct;
         }
+        /* redisplay hall of fame */
         hallOfFame(correct);
         // Use `clearInterval()` to stop the timer
         clearInterval(timeInterval);
@@ -229,9 +237,12 @@ function countdown() {
     }, 1000);
 
     if((correct + wrong ) <= question.length){
+        /* if not at the last question, get the next question set */
         qSet();
     } else{
         timerEl.textContent = '';
+        /* once user has gotten to the last question, find out if all questions answered correctly
+        or not and display message accordingly */
         if((correct + wrong ) == question.length){
             if(correct == question.length){
                 document.getElementById("over").innerHTML="Well done, you reached the end of the trench run and your missile hit!<br/>Bye bye Death Star!<br/><br/>You scored: "+correct;
@@ -260,12 +271,14 @@ function countdown() {
 }
 
 function add5(){
+    /* add 5 seconds if correct answer guessed and move on to next question */
     correct +=1;
     timeLeft+=5;
     qSet();
     document.getElementById("score").innerHTML=correct;
 }
 function sub10(){
+    /* subtract 10 seconds if wrong guess and move on to next question , set to 0 if less than 10 seconds */
     if(timeLeft <10){
         timeLeft = 0;
     }else{
@@ -276,7 +289,7 @@ function sub10(){
 }
 
 function clearScore(){
-    // debugger;
+    /* clear record and hall of fame if user requests */
     var $confirm = confirm("Are you sure you want to clear the top score and Hall of Fame?")
     if($confirm){
         localStorage.setItem("highScore","0");
@@ -288,7 +301,7 @@ function clearScore(){
 }
 
 function showHof(){
-
+    /* display hall of fame*/
     var showList = JSON.parse(localStorage.getItem("hallOfFame"));
     var $loop = 0;
     var display = "";
@@ -307,8 +320,9 @@ function showHof(){
 }
 
 function hallOfFame(num){
+    /* if hall of fame is empty, load dummy data, other wise pull hall of fame, 
+    add users score, then trim off the last record */
 
-// debugger;
     if(num == 101){
         var list = JSON.parse(localStorage.getItem("hallOfFame")); 
         if(!list){
@@ -346,7 +360,7 @@ function hallOfFame(num){
             var list = JSON.parse(localStorage.getItem("hallOfFame")); 
         }
 
-        // var last = list[list.length - 1];
+        /* pull hall of fame and order according to score */
         var listSort = list.sort(function(a,b){
             return b.score - a.score;
         });
@@ -360,6 +374,8 @@ function hallOfFame(num){
             score: num
         }
         if(num !== 101){
+            /* 101 is dummy parameter, checks that isn't a dummy run and then gets users name for user board
+            if score is high enough, otherwise advises didn't make it*/
             if(thisScore.score > parseInt(lowest)){
                 var user = prompt("The force is strong in this one.\n\nYou've made the leaderboard!\n\nWhat's your name?");
                 var thisScore = {
